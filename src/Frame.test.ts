@@ -1,12 +1,13 @@
-import { characterizeFrame, FrameType, scoreFrame } from "./frame"
+import { characterizeFrame, FrameType } from "./Frame"
 describe("Frame", () => {
   describe("Characterizing a Frame", () => {
     let frameType: FrameType | undefined
     describe("When a frame has no shots yet", () => {
       beforeEach(() => {
-        frameType = characterizeFrame([])
+        const frame = []
+        frameType = characterizeFrame(frame)
       })
-      it("should be a open frame", () => {
+      it.only("should be incomplete", () => {
         expect(frameType).toBe(FrameType.Open)
       })
     })
