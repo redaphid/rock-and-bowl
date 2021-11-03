@@ -25,7 +25,7 @@ describe("Frame", () => {
       })
     })
     describe("Open", ()=>{
-      describe("when the frame has 2 shots, and the sum of the 2 < 10", () => {
+      describe("when a player rolled twice, and didn't knock all of the pins down", () => {
         beforeEach(() => {
           rolls = [5, 2]
           frameType = characterizeFrame(rolls)
@@ -35,24 +35,28 @@ describe("Frame", () => {
         })
       })
     })
-    // describe("Strike", ()=>{)
-    describe("When a frame has 10 pins on the first shot", () => {
-      beforeEach(() => {
-        rolls = [10]
-        frameType = characterizeFrame(rolls)
-      })
-      it("should be a strike frame", () => {
-        expect(frameType).toBe(FrameType.Strike)
-      })
-    })
-    describe("When a frame has a sum 10 pins on the second shot", () => {
-      beforeEach(() => {
-        rolls = [6, 4]
-        frameType = characterizeFrame(rolls)
-      })
-      it("should be a spare frame", () => {
-        expect(frameType).toBe(FrameType.Spare)
+    describe("Strike", ()=>{
+      describe("When a the player knocked down 10 pins the first roll", () => {
+        beforeEach(() => {
+          rolls = [10]
+          frameType = characterizeFrame(rolls)
+        })
+        it("should be a strike frame", () => {
+          expect(frameType).toBe(FrameType.Strike)
+        })
       })
     })
+    describe("Spare", ()=>{
+      describe("When a frame has a sum 10 pins on the second shot", () => {
+        beforeEach(() => {
+          rolls = [6, 4]
+          frameType = characterizeFrame(rolls)
+        })
+        it("should be a spare frame", () => {
+          expect(frameType).toBe(FrameType.Spare)
+        })
+      })
+    })
+
   })
 })
