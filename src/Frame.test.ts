@@ -3,8 +3,7 @@ describe("Frame", () => {
   describe("When characterizing a Frame", () => {
     let frameType: FrameType | undefined
     let rolls: number[] | undefined
-    describe("Incomplete", () => {
-      describe("When the player hasn't rolled the ball yet", () => {
+    describe("When the player hasn't rolled the ball", () => {     
         beforeEach(() => {
           rolls = []
           frameType = characterizeFrame(rolls)
@@ -12,8 +11,11 @@ describe("Frame", () => {
         it("should be incomplete", () => {
           expect(frameType).toBe(FrameType.Incomplete)
         })
-        describe
-        describe("When the player rolled the ball once, and it isn't a strike", () => {
+      })
+
+      describe("When the player rolled the ball once", ()=>{
+        
+        describe("When they didn't knock all the pins down", () => {
           beforeEach(() => {
             rolls = [5]
             frameType = characterizeFrame(rolls)
@@ -22,27 +24,25 @@ describe("Frame", () => {
             expect(frameType).toBe(FrameType.Incomplete)
           })
         })
+
+        describe("When they knocked all 10 pins down", () => {
+          beforeEach(() => {
+            rolls = [10]
+            frameType = characterizeFrame(rolls)
+          })
+          it("should be a strike frame", () => {
+            expect(frameType).toBe(FrameType.Strike)
+          })
       })
     })
-    describe("Open", ()=>{
-      describe("when a player rolled twice, and didn't knock all of the pins down", () => {
+    describe("When the player rolled the ball twice", ()=>{
+      describe("When the player didn't knock all of the pins down", () => {
         beforeEach(() => {
           rolls = [5, 2]
           frameType = characterizeFrame(rolls)
         })
         it("should be a open frame", () => {
           expect(frameType).toBe(FrameType.Open)
-        })
-      })
-    })
-    describe("Strike", ()=>{
-      describe("When a the player knocked down 10 pins the first roll", () => {
-        beforeEach(() => {
-          rolls = [10]
-          frameType = characterizeFrame(rolls)
-        })
-        it("should be a strike frame", () => {
-          expect(frameType).toBe(FrameType.Strike)
         })
       })
     })
