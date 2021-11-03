@@ -24,6 +24,16 @@ describe("Frame", () => {
         })
       })
 
+      describe("When they live in some universe where they can knock down negative pins", () => {
+        beforeEach(() => {
+          rolls = [-5]
+          frameType = characterizeFrame(rolls)
+        })
+        it("should be an incomplete frame", () => {
+          expect(frameType).toBe(FrameType.Invalid)
+        })
+      })
+
       describe("When they knocked all 10 pins down", () => {
         beforeEach(() => {
           rolls = [10]
