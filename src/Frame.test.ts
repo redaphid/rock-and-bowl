@@ -13,7 +13,13 @@ describe("Frame", () => {
       })
     })
     describe("when the frame has 2 shots, and the sum of the 2 <10", ()=>{
-      
+      beforeEach(() => {
+        rolls = [5, 2]
+        frameType = characterizeFrame(rolls)
+      })
+      it("should be a open frame", () => {
+        expect(frameType).toBe(FrameType.Open)
+      })
     })
     describe("When a frame has 1 shot, and it isn't a strike", () => {
       beforeEach(() => {
