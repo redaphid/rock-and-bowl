@@ -1,11 +1,9 @@
-
-
-//*technically* this could be done with an array of arrays, 
+//*technically* this could be done with an array of arrays,
 //but I'm putting them in properties for clarity.
 interface Frame {
-  rolls: number[];
+  rolls: number[]
 }
 
 interface Game {
-  frames: Frame[];
+  frames: Frame[]
 }
