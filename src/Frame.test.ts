@@ -2,26 +2,29 @@ import { characterizeFrame, FrameType } from "./Frame"
 describe("Frame", () => {
   describe("Characterizing a Frame", () => {
     let frameType: FrameType | undefined
+    let rolls: number[] | undefined
     describe("When a frame has no shots yet", () => {
       beforeEach(() => {
-        const frame = []
-        frameType = characterizeFrame(frame)
+        rolls = []
+        frameType = characterizeFrame(rolls)
       })
-      it.only("should be incomplete", () => {
-        expect(frameType).toBe(FrameType.Open)
+      it("should be incomplete", () => {
+        expect(frameType).toBe(FrameType.Incomplete)
       })
     })
     describe("When a frame has 1 shot, and it isn't a strike", () => {
       beforeEach(() => {
-        frameType = characterizeFrame([5])
+        rolls = [5]
+        frameType = characterizeFrame(rolls)
       })
       it("should be a open frame", () => {
-        expect(frameType).toBe(FrameType.Open)
+        expect(frameType).toBe(FrameType.Incomplete)
       })
     })
     describe("When a frame has 10 pins on the first shot", () => {
       beforeEach(() => {
-        frameType = characterizeFrame([10])
+        rolls = [10]
+        frameType = characterizeFrame(rolls)
       })
       it("should be a strike frame", () => {
         expect(frameType).toBe(FrameType.Strike)
@@ -29,7 +32,8 @@ describe("Frame", () => {
     })
     describe("When a frame has 10 pins on the second shot", () => {
       beforeEach(() => {
-        frameType = characterizeFrame([6, 4])
+        rolls = [6, 4]
+        frameType = characterizeFrame(rolls)
       })
       it("should be a spare frame", () => {
         expect(frameType).toBe(FrameType.Spare)
