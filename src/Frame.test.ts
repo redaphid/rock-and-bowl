@@ -3,39 +3,38 @@ describe("Frame", () => {
   describe("When characterizing a Frame", () => {
     let frameType: FrameType | undefined
     let rolls: number[] | undefined
-    describe("When the player hasn't rolled the ball", () => {     
+    describe("When the player hasn't rolled the ball", () => {
+      beforeEach(() => {
+        rolls = []
+        frameType = characterizeFrame(rolls)
+      })
+      it("should be incomplete", () => {
+        expect(frameType).toBe(FrameType.Incomplete)
+      })
+    })
+
+    describe("When the player rolled the ball once", () => {
+      describe("When they didn't knock all the pins down", () => {
         beforeEach(() => {
-          rolls = []
+          rolls = [5]
           frameType = characterizeFrame(rolls)
         })
-        it("should be incomplete", () => {
+        it("should be an incomplete frame", () => {
           expect(frameType).toBe(FrameType.Incomplete)
         })
       })
 
-      describe("When the player rolled the ball once", ()=>{
-        
-        describe("When they didn't knock all the pins down", () => {
-          beforeEach(() => {
-            rolls = [5]
-            frameType = characterizeFrame(rolls)
-          })
-          it("should be an incomplete frame", () => {
-            expect(frameType).toBe(FrameType.Incomplete)
-          })
+      describe("When they knocked all 10 pins down", () => {
+        beforeEach(() => {
+          rolls = [10]
+          frameType = characterizeFrame(rolls)
         })
-
-        describe("When they knocked all 10 pins down", () => {
-          beforeEach(() => {
-            rolls = [10]
-            frameType = characterizeFrame(rolls)
-          })
-          it("should be a strike frame", () => {
-            expect(frameType).toBe(FrameType.Strike)
-          })
+        it("should be a strike frame", () => {
+          expect(frameType).toBe(FrameType.Strike)
+        })
       })
     })
-    describe("When the player rolled the ball twice", ()=>{
+    describe("When the player rolled the ball twice", () => {
       describe("When the player didn't knock all of the pins down", () => {
         beforeEach(() => {
           rolls = [5, 2]
@@ -45,11 +44,9 @@ describe("Frame", () => {
           expect(frameType).toBe(FrameType.Open)
         })
       })
-    })
-    describe("Spare", ()=>{
-      describe("When a frame has a sum 10 pins on the second shot", () => {
+      describe("When the player knocked down all of the pins", () => {
         beforeEach(() => {
-          rolls = [6, 4]
+          rolls = [4, 6]
           frameType = characterizeFrame(rolls)
         })
         it("should be a spare frame", () => {
@@ -57,6 +54,5 @@ describe("Frame", () => {
         })
       })
     })
-
   })
 })
