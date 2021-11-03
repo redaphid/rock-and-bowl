@@ -8,12 +8,26 @@ interface Game {
   frames: Frame[]
 }
 
-export const characterizeFrame = (rolls:number[]): FrameType => {
-  //It seems like Typescript doesn't care about checking undefineds.
-  if (rolls[0] === 10) return FrameType.Strike
-  if (rolls[0] + rolls[1] === 10) return FrameType.Spare
+export const characterizeFrame = (rolls: number[]): FrameType => {
+  switch(rolls.length) {
+    case 0:
+      return FrameType.Incomplete
+    case 1:
 
-  return FrameType.Open
+     if(rolls[0] === 10) {
+       return FrameType.Strike
+     }
+     return FrameType.Incomplete
+
+    case 2:
+      if(rolls[0] + rolls[1] === 10) {
+        return FrameType.Spare
+      }
+      return FrameType.Open
+
+    default:
+      throw new Error('Invalid frame length')
+  }
 }
 export enum FrameType {
   Open = "Open",

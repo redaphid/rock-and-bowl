@@ -12,6 +12,9 @@ describe("Frame", () => {
         expect(frameType).toBe(FrameType.Incomplete)
       })
     })
+    describe("when the frame has 2 shots, and the sum of the 2 <10", ()=>{
+      
+    })
     describe("When a frame has 1 shot, and it isn't a strike", () => {
       beforeEach(() => {
         rolls = [5]
