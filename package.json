@@ -1,0 +1,23 @@
+{
+  "name": "rock-and-bowl",
+  "version": "1.0.0",
+  "description": "A bowling score keeper with a very exciting name.",
+  "main": "index.ts",
+  "repository": "git@github.com:redaphid/rock-and-bowl.git",
+  "author": "redaphid <iam@aaronherres.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node index.ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7"
+  }
+}
