@@ -3,7 +3,7 @@ describe("Frame", () => {
   describe("When characterizing a Frame", () => {
     let frameType: FrameType | undefined
     let rolls: number[] | undefined
-    describe("Incomplete frames", () => {
+    describe("Incomplete", () => {
       describe("When the player hasn't rolled the ball yet", () => {
         beforeEach(() => {
           rolls = []
@@ -24,8 +24,8 @@ describe("Frame", () => {
         })
       })
     })
-    describe("Open frames", ()=>{
-      describe("when the frame has 2 shots, and the sum of the 2 <10", () => {
+    describe("Open", ()=>{
+      describe("when the frame has 2 shots, and the sum of the 2 < 10", () => {
         beforeEach(() => {
           rolls = [5, 2]
           frameType = characterizeFrame(rolls)
@@ -35,7 +35,7 @@ describe("Frame", () => {
         })
       })
     })
-
+    // describe("Strike", ()=>{)
     describe("When a frame has 10 pins on the first shot", () => {
       beforeEach(() => {
         rolls = [10]
