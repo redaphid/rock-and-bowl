@@ -14,7 +14,8 @@ export const scoreGame = (frames: number[][]) => {
   let libraryFormat = framesToCheck.map(frameToLibraryFormat)
   
   if (lastFrame) {
-    libraryFormat.push(specialLastFrameLogic(lastFrame))
+    const lastFormatted = specialLastFrameLogic(lastFrame)
+    libraryFormat.push(lastFormatted)
   }
   const scoreResults = bowl(libraryFormat)
 
@@ -32,9 +33,9 @@ export const frameToLibraryFormat = (frame: number[]) => {
     case FrameStatus.Open:
       return `${frame[0]}${frame[1]}`
     case FrameStatus.Invalid:
-      return `${frame[0]}${frame[1]}}`
-    default:
       return "0"
+    default:
+      return ""
   }
 }
 interface libraryScore {
@@ -51,10 +52,27 @@ const getLatestScorePossible = (scores: libraryScore[]) => {
   return lastScore
 }
 
-const specialLastFrameLogic = (frame: number[]) => {
-  if (frame.length === 3) {
-    return `${frame[0]}${frame[1]}${frame[2]}`
-  } else {
-    return `${frame[0]}${frame[1]}`
+/* 
+* The score for the 10th frame is the total number of pins knocked down in the 10th frame.
+* If you roll a spare in the first two shots of the 10th frame, you get 1 more shot.
+* If you leave the 10th frame open after two shots, the game is over and you do not get an additional shot.
+*/
+const specialLastFrameLogic = (frame: number[]):string =>{
+  const [first,  second, third] = frame
+
+  if(first === undefined) return ''
+  if(second === undefined) return frameToLibraryFormat([first])
+
+  const firstFrameStatus = getFrameStatus([first])
+  
+  if(firstFrameStatus === FrameStatus.Strike) {
+    return `X${specialLastFrameLogic([second, third])}`
   }
+
+  const secondFrameStatus = getFrameStatus([first, second])
+  if(secondFrameStatus === FrameStatus.Spare) {
+    return `${first}/${frameToLibraryFormat([third])}`
+  }
+  console.log({first})
+  return `${first}`
 }
