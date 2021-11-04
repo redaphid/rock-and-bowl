@@ -1,4 +1,4 @@
-import { FrameInfo } from "./Frame"
+import { FrameInfo, FrameStatus } from "./Frame"
 import { scoreGame } from "./Game"
 describe("When scoring a game", () => {
   let score: number
@@ -6,7 +6,7 @@ describe("When scoring a game", () => {
     expect(scoreGame).toBeDefined()
   })
 
-  describe("When the player hasn't completed any frames", ()=>{
+  describe("When the player hasn't even rolled the ball", ()=>{
       beforeEach(()=>{
         const frames = []
         score = scoreGame([])
@@ -15,4 +15,18 @@ describe("When scoring a game", () => {
         expect(score).toEqual(0)
       })
   })
+  describe("When the player hasn't completed any frames", ()=>{
+    beforeEach(()=>{
+      const frames = [
+        {
+          status: FrameStatus.Incomplete,
+          rolls:[2]
+        }
+      ]
+      score = scoreGame(frames)
+    })
+    it("should give them a score of 0", ()=>{
+      expect(score).toEqual(0)
+    })
+})
 })
