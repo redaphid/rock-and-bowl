@@ -1,4 +1,4 @@
-import { FrameInfo } from "./Frame"
+import { FrameInfo, FrameStatus, getFrameStatus } from "./Frame"
 import bowl from "bowling"
 
 
@@ -8,12 +8,24 @@ import bowl from "bowling"
 // result = bowl(aCompleteGame)
 
 // console.log(result)
-export const scoreGame = (frames: FrameInfo[]) => {
-  const scoreResults = bowl(['0'])
-  return scoreResults.slice(-1)[0].cumulative
-  const rolls = frames.map((f) => f.rolls)
+const last = (arr) => arr[arr.length - 1]
 
-  return rolls.reduce((score, roll) => {
-    return score + roll[0]
-  }, 0)
+export const scoreGame = (frames: number[][]) => {
+  const libraryFormat = frames.map(frameToLibraryFormat)
+  const scoreResults = bowl(libraryFormat)
+  return last(scoreResults)?.cumulative || 0
 }
+const frameToLibraryFormat = (frame: number[])=> {
+  const frameStatus = getFrameStatus(frame)
+  switch(frameStatus) {
+    case FrameStatus.Strike:
+      return 'X'
+    case FrameStatus.Spare:
+      return `${frame[0]}/`
+    case FrameStatus.Open:
+      return `${frame[0]}${frame[1]}`
+      default:
+        return '0'
+  }
+}
+
