@@ -4,15 +4,19 @@ import bowl from "bowling"
 const last = (arr) => arr[arr.length - 1]
 
 export const scoreGame = (frames: number[][]) => {
-  console.log({frames})
-  const libraryFormat = frames.map(frameToLibraryFormat)
-  console.log({libraryFormat})
+  //don't want to modify the input
+  let framesToCheck = [...frames]
+  let lastFrame;
+  if(framesToCheck.length === 10) {
+    lastFrame = framesToCheck.pop()
+  }
+  const libraryFormat = framesToCheck.map(frameToLibraryFormat)
   const scoreResults = bowl(libraryFormat)
   return last(scoreResults)?.cumulative || 0
 }
-const frameToLibraryFormat = (frame: number[]) => {
+export const frameToLibraryFormat = (frame: number[]) => {
+
   const frameStatus = getFrameStatus(frame)
-  console.log({frame, frameStatus})
   switch (frameStatus) {
     case FrameStatus.Strike:
       return "X"
@@ -23,6 +27,6 @@ const frameToLibraryFormat = (frame: number[]) => {
     case FrameStatus.Invalid:
       return `${frame[0]}${frame[1]}}`
     default:
-      return "X81"
+      return "0"
   }
 }
