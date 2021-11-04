@@ -4,11 +4,17 @@
 As a bowler, I want to be able to enter a list of bowling frame scores so that I can see the
 progress and total score of my game.
 
+## Done?
+
 ## Acceptance Criteria:
 * I will have a place to enter a series of scores per frame.
+
 * A strike is scored as defined below.
+  - DONE
 * A spare is scored as defined below.
+  - DONE
 * An incomplete game is scored up to the last frame provided.
+  - DONE
 
 ## Information
 Please read through the following and develop a solution to complete the user story. Your deliverable
@@ -18,6 +24,8 @@ should be working code (github, zip file, other… up to you) with some brief in
 
 ### Frame
  A frame consists of 2 opportunities to knock down 10 bowling pins with a bowling ball. The 10 pins are then reset for the next frame.
+ 
+ - DONE
 ___
 
 ### How to Score
@@ -26,14 +34,22 @@ ___
 * If you knock down all 10 pins in the first shot of a frame, you get a strike.
 * A strike earns 10 points plus the sum of your next two shots.
 
+- DONE
+
 #### Spare
 * If you knock down all 10 pins using both shots of a frame, you get a spare.
 * A spare earns 10 points plus the sum of your next one shot.
 
+- DONE
+
 #### Open Frame
 * If you do not knock down all 10 pins using both shots of your frame (9 or fewerpins knocked down), you have an open frame.
 
+- DONE
+
 * An open frame only earns the number of pins knocked down.
+
+- DONE
 
 #### The 10th Frame
 * If you roll a strike in the first shot of the 10th frame, you get 2 more shots.
