@@ -1,4 +1,4 @@
 
-export const score = ()=>{
+export const scoreGame = ()=>{
 
 }
