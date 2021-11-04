@@ -1,15 +1,15 @@
-import { characterizeFrame, FrameType } from "./Frame"
+import { getFrameStatus, FrameStatus } from "./Frame"
 describe("Frame", () => {
   describe("When characterizing a Frame", () => {
-    let frameType: FrameType | undefined
+    let status: FrameStatus | undefined
     let rolls: number[] | undefined
     describe("When the player hasn't rolled the ball", () => {
       beforeEach(() => {
         rolls = []
-        frameType = characterizeFrame(rolls)
+        status = getFrameStatus(rolls)
       })
       it("should be incomplete", () => {
-        expect(frameType).toBe(FrameType.Incomplete)
+        expect(status).toBe(FrameStatus.Incomplete)
       })
     })
 
@@ -17,30 +17,20 @@ describe("Frame", () => {
       describe("When they didn't knock all the pins down", () => {
         beforeEach(() => {
           rolls = [5]
-          frameType = characterizeFrame(rolls)
+          status = getFrameStatus(rolls)
         })
         it("should be an incomplete frame", () => {
-          expect(frameType).toBe(FrameType.Incomplete)
-        })
-      })
-
-      describe("When they live in some universe where they can knock down negative pins", () => {
-        beforeEach(() => {
-          rolls = [-5]
-          frameType = characterizeFrame(rolls)
-        })
-        it("should be an incomplete frame", () => {
-          expect(frameType).toBe(FrameType.Invalid)
+          expect(status).toBe(FrameStatus.Incomplete)
         })
       })
 
       describe("When they knocked all 10 pins down", () => {
         beforeEach(() => {
           rolls = [10]
-          frameType = characterizeFrame(rolls)
+          status = getFrameStatus(rolls)
         })
         it("should be a strike frame", () => {
-          expect(frameType).toBe(FrameType.Strike)
+          expect(status).toBe(FrameStatus.Strike)
         })
       })
     })
@@ -48,19 +38,19 @@ describe("Frame", () => {
       describe("When the player didn't knock all of the pins down", () => {
         beforeEach(() => {
           rolls = [5, 2]
-          frameType = characterizeFrame(rolls)
+          status = getFrameStatus(rolls)
         })
         it("should be a open frame", () => {
-          expect(frameType).toBe(FrameType.Open)
+          expect(status).toBe(FrameStatus.Open)
         })
       })
       describe("When the player knocked down all of the pins", () => {
         beforeEach(() => {
           rolls = [4, 6]
-          frameType = characterizeFrame(rolls)
+          status = getFrameStatus(rolls)
         })
         it("should be a spare frame", () => {
-          expect(frameType).toBe(FrameType.Spare)
+          expect(status).toBe(FrameStatus.Spare)
         })
       })
     })

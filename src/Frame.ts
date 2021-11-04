@@ -1,38 +1,29 @@
-//*technically* this could be done with an array of arrays,
-//but I'm putting them in properties for clarity.
-interface Frame {
-  rolls: number[]
-}
-
-interface Game {
-  frames: Frame[]
-}
-
-export const characterizeFrame = (rolls: number[]): FrameType => {
+export const getFrameStatus = (rolls: number[]): FrameStatus => {
   switch(rolls.length) {
     case 0:
-      return FrameType.Incomplete
+      return FrameStatus.Incomplete
     case 1:
 
      if(rolls[0] === 10) {
-       return FrameType.Strike
+       return FrameStatus.Strike
      }
-     return FrameType.Incomplete
+     return FrameStatus.Incomplete
 
     case 2:
       if(rolls[0] + rolls[1] === 10) {
-        return FrameType.Spare
+        return FrameStatus.Spare
       }
-      return FrameType.Open
+      return FrameStatus.Open
 
     default:
       throw new Error('Invalid frame length')
   }
 }
-export enum FrameType {
+export enum FrameStatus {
   Open = "Open",
   Spare = "Spare",
   Strike = "Strike",
   Incomplete = "Incomplete",
   Invalid = "Invalid",
+  Unknown = "Unknown"
 }
