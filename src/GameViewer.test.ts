@@ -14,6 +14,9 @@ describe("GameViewer", () => {
     it("should tell us we're on frame 0", () => {
       expect(game.currentFrame).toEqual(0)
     })
+    it("should return a view with 10 frames", ()=>{
+      expect(game.frames.length).toEqual(10)
+    })
     it("should tell us all the frames are incomplete", () => {
       game.frames.forEach((frame) => {
         expect(frame.status).toEqual(FrameStatus.Incomplete)
