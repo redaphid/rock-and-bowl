@@ -48,6 +48,24 @@ describe("When scoring a game", () => {
     })
   })
 
+  //spot check unfinished game
+  describe("When the player completes a few frames", () => {
+    let score: number
+    beforeEach(() => {
+      const frames = [
+        [1, 2],
+        [3, 4],
+        [5, 5],
+        [6, 3],
+      ]
+      score = scoreGame(frames)
+    })
+
+    it("should give them the correct score", () => {
+      expect(score).toEqual(35)
+    })
+  })
+
   //Spot checking with the wikipedia examples
   describe("When a player gets a strike on the first frame, and knocks down 9 pins total in the 2nd", () => {
     let score: number
