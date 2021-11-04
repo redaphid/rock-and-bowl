@@ -1,5 +1,4 @@
-import { scoreGame, frameToLibraryFormat } from "./Game"
-import bowl from "bowling"
+import { scoreGame } from "./Score"
 describe("When scoring a game", () => {
   it("should exist", () => {
     expect(scoreGame).toBeDefined()

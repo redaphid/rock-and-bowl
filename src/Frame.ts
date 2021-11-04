@@ -9,6 +9,7 @@ export enum FrameStatus {
 export interface FrameInfo {
   status: FrameStatus
   rolls: number[]
+  score: number
 }
 export const getFrameStatus = (rolls: number[]): FrameStatus => {
   switch (rolls.length) {

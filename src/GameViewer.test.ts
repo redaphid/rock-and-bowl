@@ -1,5 +1,5 @@
 import { FrameStatus } from "./Frame"
-import { scoreGame } from "./Game"
+import { scoreGame } from "./Score"
 import { GameView, getGameView } from "./GameViewer"
 describe("GameViewer", () => {
   describe("Given an empty frame array", () => {
@@ -37,6 +37,22 @@ describe("GameViewer", () => {
     })
     it("should tell us we're on frame 5", () => {
       expect(game.currentFrame).toEqual(5)
+    })  
+  })
+  describe("Given a complete, perfect game", () => {
+    let frames: number[][]
+    let game: GameView
+    beforeEach(() => {
+      const frames = new Array(9).fill([10])
+      frames.push([10, 10, 10])
+
+      game = getGameView(frames)
+    })
+    it("should give us a score of 300", () => {
+      expect(game.score).toEqual(scoreGame(frames))
+    })
+    it("should tell us we're done", () => {
+      expect(game.currentFrame).toEqual(10)
     })  
   })
 })
