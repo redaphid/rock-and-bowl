@@ -3,7 +3,7 @@ export enum FrameStatus {
   Spare = "Spare",
   Strike = "Strike",
   Incomplete = "Incomplete",
-  Invalid = "Invalid",
+  PossiblyOkIfLastFrame = "Possibly ok, if you see this in the last frame",
   Unknown = "Unknown",
 }
 export interface FrameInfo {
@@ -29,6 +29,6 @@ export const getFrameStatus = (rolls: number[]): FrameStatus => {
       return FrameStatus.Open
 
     default:
-      return FrameStatus.Invalid
+      return FrameStatus.PossiblyOkIfLastFrame
   }
 }

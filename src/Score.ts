@@ -31,7 +31,7 @@ export const frameToLibraryFormat = (frame: number[]) => {
       return `${frame[0]}/`
     case FrameStatus.Open:
       return `${frame[0]}${frame[1]}`
-    case FrameStatus.Invalid:
+    case FrameStatus.PossiblyOkIfLastFrame:
       return "0"
     case FrameStatus.Incomplete:
     default:
