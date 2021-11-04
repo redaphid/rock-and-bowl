@@ -82,13 +82,24 @@ describe("When scoring a game", () => {
       })
     })
     describe("When a player is almost done with the game, and so far had strikes every time", () => {
-      let score: number
+      let score: number = 0
       beforeEach(() => {  
         const frames = new Array(9).fill([10])
         score = scoreGame(frames)
       })
       it("should give us some score other than 0", ()=>{
-        expect(score).toBeGreaterThan(0)
+        expect(score).toBe(210)
+      })
+    })
+    describe("When a player has a perfect game", () => {
+      let score: number = 0
+      beforeEach(() => {  
+        const frames = new Array(9).fill([10])
+        frames.push([10,10,10])
+        score = scoreGame(frames)
+      })
+      it("should give us some score other than 0", ()=>{
+        expect(score).toBe(300)
       })
     })
   })
