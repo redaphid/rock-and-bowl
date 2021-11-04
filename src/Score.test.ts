@@ -78,7 +78,7 @@ describe("When scoring a game", () => {
       const frames = new Array(9).fill([10])
       score = scoreGame(frames)
     })
-    it("should give us some score other than 0", () => {
+    it("should give us some score of 210", () => {
       expect(score).toBe(210)
     })
   })

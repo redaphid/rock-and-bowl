@@ -1,7 +1,5 @@
-import { FrameInfo, FrameStatus, getFrameStatus } from "./Frame"
+import { FrameStatus, getFrameStatus } from "./Frame"
 import bowl from "bowling"
-
-const last = (arr) => arr[arr.length - 1]
 
 export const scoreGame = (frames: number[][]) => {
   //don't want to modify the input
@@ -11,12 +9,14 @@ export const scoreGame = (frames: number[][]) => {
   if (framesToCheck.length === 10) {
     lastFrame = framesToCheck.pop()
   }
+
   let libraryFormat = framesToCheck.map(frameToLibraryFormat)
-  
+
   if (lastFrame) {
     const lastFormatted = specialLastFrameLogic(lastFrame)
     libraryFormat.push(lastFormatted)
   }
+
   const scoreResults = bowl(libraryFormat)
 
   return getLatestScorePossible(scoreResults)
@@ -24,7 +24,6 @@ export const scoreGame = (frames: number[][]) => {
 
 export const frameToLibraryFormat = (frame: number[]) => {
   const frameStatus = getFrameStatus(frame)
-
   switch (frameStatus) {
     case FrameStatus.Strike:
       return "X"
@@ -34,8 +33,9 @@ export const frameToLibraryFormat = (frame: number[]) => {
       return `${frame[0]}${frame[1]}`
     case FrameStatus.Invalid:
       return "0"
+    case FrameStatus.Incomplete:
     default:
-      return ""
+      return "-"
   }
 }
 interface libraryScore {
@@ -60,7 +60,7 @@ const getLatestScorePossible = (scores: libraryScore[]) => {
 const specialLastFrameLogic = (frame: number[]):string =>{
   const [first,  second, third] = frame
 
-  if(first === undefined) return ''
+  if(first === undefined) return "-"
   if(second === undefined) return frameToLibraryFormat([first])
 
   const firstFrameStatus = getFrameStatus([first])
@@ -73,6 +73,5 @@ const specialLastFrameLogic = (frame: number[]):string =>{
   if(secondFrameStatus === FrameStatus.Spare) {
     return `${first}/${frameToLibraryFormat([third])}`
   }
-  console.log({first})
   return `${first}`
 }
