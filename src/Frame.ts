@@ -34,4 +34,5 @@ export enum FrameType {
   Spare = "Spare",
   Strike = "Strike",
   Incomplete = "Incomplete",
+  Invalid = "Invalid",
 }
