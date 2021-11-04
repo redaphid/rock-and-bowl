@@ -10,6 +10,7 @@ export interface FrameInfo {
   status: FrameStatus
   rolls: number[]
   score: number
+  scoreUntilNow: number
 }
 export const getFrameStatus = (rolls: number[]): FrameStatus => {
   switch (rolls.length) {

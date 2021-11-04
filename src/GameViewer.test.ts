@@ -43,13 +43,13 @@ describe("GameViewer", () => {
     let frames: number[][]
     let game: GameView
     beforeEach(() => {
-      const frames = new Array(9).fill([10])
+      frames = new Array(9).fill([10])
       frames.push([10, 10, 10])
 
       game = getGameView(frames)
     })
     it("should give us a score of 300", () => {
-      expect(game.score).toEqual(scoreGame(frames))
+      expect(game.score).toEqual(300)
     })
     it("should tell us we're done", () => {
       expect(game.currentFrame).toEqual(10)

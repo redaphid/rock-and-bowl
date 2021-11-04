@@ -21,6 +21,7 @@ function getDisplayFrame(frame: number[]): FrameInfo {
     status: getFrameStatus(frame),
     rolls: frame,
     score: scoreGame([frame]),
+    scoreUntilNow:0,
   }
 }
 function findCurrentFrame(frames: FrameInfo[]): number {
@@ -35,11 +36,17 @@ function findCurrentFrame(frames: FrameInfo[]): number {
 }
 function getDisplayFrames(frames: number[][]): FrameInfo[] {
   const displayFrames = frames.map(getDisplayFrame)
+  
+  displayFrames.forEach((frame, i) => {
+    frame.scoreUntilNow = scoreGame(frames.slice(0, i))
+  })
+
   while (displayFrames.length < 10) {
     displayFrames.push({
       status: FrameStatus.Incomplete,
       score: 0,
       rolls: [],
+      scoreUntilNow: 0,
     })
   }
   return displayFrames
