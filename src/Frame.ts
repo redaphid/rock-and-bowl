@@ -16,7 +16,7 @@ export const getFrameStatus = (rolls: number[]): FrameStatus => {
       return FrameStatus.Open
 
     default:
-      throw new Error('Invalid frame length')
+      return FrameStatus.Invalid
   }
 }
 export enum FrameStatus {

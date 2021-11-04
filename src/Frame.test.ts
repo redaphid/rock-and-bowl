@@ -23,7 +23,6 @@ describe("Frame", () => {
           expect(status).toBe(FrameStatus.Incomplete)
         })
       })
-
       describe("When they knocked all 10 pins down", () => {
         beforeEach(() => {
           rolls = [10]
@@ -33,8 +32,7 @@ describe("Frame", () => {
           expect(status).toBe(FrameStatus.Strike)
         })
       })
-    })
-    describe("When the player rolled the ball twice", () => {
+
       describe("When the player didn't knock all of the pins down", () => {
         beforeEach(() => {
           rolls = [5, 2]
@@ -52,6 +50,26 @@ describe("Frame", () => {
         it("should be a spare frame", () => {
           expect(status).toBe(FrameStatus.Spare)
         })
+      })
+    })
+    describe("Some error conditions", () => {
+      describe("When the player rolls the ball more than 2 times", () => {
+        it.todo("should be invalid")
+      })
+      describe("the player knocked some negative number of pins down", () => {
+        it.todo("should be an invalid frame")
+        it.todo("should tell us it's invalid because the number of pins is negative")
+      })
+      describe("the player knocked more than 10 pins down", () => {
+        it.todo("should be an invalid frame")
+        it.todo("should tell us it's invalid because the number of pins is  > 10")
+      })
+      describe("the player knocked some fractional number of pins down", () => {
+        it.todo("should be an invalid frame")
+      })
+      describe("the player knocked more than 10 pins down", () => {})
+      describe("When the player rolled the ball a second time in a frame after a strike", () => {
+        it.todo("should be an invalid frame")
       })
     })
   })
