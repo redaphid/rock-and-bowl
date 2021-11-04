@@ -59,8 +59,7 @@ const getLatestScorePossible = (scores: libraryScore[]) => {
 */
 const specialLastFrameLogic = (frame: number[]):string =>{
   const [first,  second, third] = frame
-
-  if(first === undefined) return "-"
+  if(first === undefined) return ''
   if(second === undefined) return frameToLibraryFormat([first])
 
   const firstFrameStatus = getFrameStatus([first])
@@ -71,7 +70,7 @@ const specialLastFrameLogic = (frame: number[]):string =>{
 
   const secondFrameStatus = getFrameStatus([first, second])
   if(secondFrameStatus === FrameStatus.Spare) {
-    return `${first}/${frameToLibraryFormat([third])}`
+    return `${first}/`
   }
   return `${first}`
 }

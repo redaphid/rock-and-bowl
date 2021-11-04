@@ -84,15 +84,36 @@ describe("When scoring a game", () => {
   })
   describe("10th frame problems", () => {
     // Test case results from https://www.bowlinggenius.com/
-    describe("When a player has a perfect game", () => {
+    describe("When a player played a perfect game", () => {
       let score: number = 0
       beforeEach(() => {
         const frames = new Array(9).fill([10])
         frames.push([10, 10, 10])
         score = scoreGame(frames)
       })
-      it("should give us the perfect score of 300", () => {
+      it("should give us t a score of 300", () => {
         expect(score).toBe(300)
+      })
+    })
+    describe("When a player rolled 10 strikes in a row", () => {
+      let score: number = 0
+      beforeEach(() => {
+        const frames = new Array(10).fill([10])
+        score = scoreGame(frames)
+      })
+      it("should give us a score of 240", () => {
+        expect(score).toBe(240)
+      })
+    })
+    describe("When a player rolls a spare on the last frame", () => {
+      let score: number = 0
+      beforeEach(() => {
+        const frames = new Array(9).fill([10])
+        frames.push([10, 5, 5])
+        score = scoreGame(frames)
+      })
+      it("should give us a score of 285", () => {
+        expect(score).toBe(285)
       })
     })
   })
