@@ -38,16 +38,7 @@ function getDisplayFrames(frames: number[][]): FrameInfo[] {
   const displayFrames = frames.map(getDisplayFrame)
   
   displayFrames.forEach((frame, i) => {
-    frame.scoreUntilNow = scoreGame(frames.slice(0, i))
+    frame.scoreUntilNow = scoreGame(frames.slice(0, i)) + frame.score
   })
-
-  while (displayFrames.length < 10) {
-    displayFrames.push({
-      status: FrameStatus.Incomplete,
-      score: 0,
-      rolls: [],
-      scoreUntilNow: 0,
-    })
-  }
   return displayFrames
 }
