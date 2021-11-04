@@ -12,8 +12,8 @@ describe("GameViewer", () => {
     it("should give us a score of 0", () => {
       expect(game.score).toEqual(0)
     })
-    it("should tell us we're on frame 0", () => {
-      expect(game.currentFrame).toEqual(0)
+    it("should tell us we're on frame 1", () => {
+      expect(game.currentFrame).toEqual(1)
     })
     it("should return a view with 10 frames", ()=>{
       expect(game.frames.length).toEqual(10)
@@ -21,6 +21,7 @@ describe("GameViewer", () => {
     it("should tell us all the frames are incomplete", () => {
       game.frames.forEach((frame) => {
         expect(frame.status).toEqual(FrameStatus.Incomplete)
+        expect(frame.rolls).toEqual([])
       })
     })
   })
@@ -34,13 +35,8 @@ describe("GameViewer", () => {
     it("should give us a score of 35", () => {
       expect(game.score).toEqual(scoreGame(frames))
     })
-    // it("should tell us we're on frame 3", () => {
-    //   expect(game.currentFrame).toEqual(3)
-    // })
-    // it("should tell us all the frames are complete", () => {
-    //   game.frames.forEach((frame) => {
-    //     expect(frame.status).toEqual(FrameStatus.Complete)
-    //   })
-    // })  
+    it("should tell us we're on frame 5", () => {
+      expect(game.currentFrame).toEqual(5)
+    })  
   })
 })

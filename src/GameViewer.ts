@@ -1,4 +1,4 @@
-import { FrameInfo, FrameStatus } from "./Frame"
+import { FrameInfo, FrameStatus, getFrameStatus } from "./Frame"
 import { scoreGame } from "./Game"
 
 export interface GameView {
@@ -7,11 +7,39 @@ export interface GameView {
   frames: FrameInfo[]
 }
 export const getGameView = (frames: number[][]): GameView => {
-  return {
+  const displayFrames = getDisplayFrames(frames)
+  const view = {
     score: scoreGame(frames),
-    currentFrame: 0,
-    frames: new Array(10).fill(0).map((_, i) => {
-      return {status: FrameStatus.Incomplete, rolls: []}
+    currentFrame: findCurrentFrame(frames),
+    frames: displayFrames
+  } as GameView
+  return view
+}
+
+function getDisplayFrame(frame: number[]): FrameInfo {
+  return {
+    status: getFrameStatus(frame),
+    rolls: frame,
+  }
+}
+function findCurrentFrame(frames: number[][]): number {
+  let currentFrame = frames.length
+  frames.forEach((frame, i) => {
+    const status = getFrameStatus(frame)
+    if (status == FrameStatus.Incomplete) {
+      currentFrame = i
+      return
+    }
+  })
+  return currentFrame + 1
+}
+function getDisplayFrames(frames: number[][]): FrameInfo[] {
+  const displayFrames = frames.map(getDisplayFrame)
+  while(displayFrames.length < 10) {
+    displayFrames.push({
+      status: FrameStatus.Incomplete,
+      rolls: [],
     })
   }
+  return displayFrames
 }
